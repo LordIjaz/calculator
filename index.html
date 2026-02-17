@@ -1,76 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IJAZ CALORIE CALCULATOR</title>
   <style>
-		.button-class {
-			background-color: #4CAF50;
-			/* Green */
-			border: none;
-			color: white;
-			padding: 10px 20px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 16px;
-			margin: 4px 2px;
-			cursor: pointer;
-			border-radius: 4px;
-		}
-	</style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button.submit {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    button.submit:hover {
+      background-color: #45a049;
+    }
+
+    .tdee {
+      font-size: 18px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .button-class {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  </style>
 </head>
-<body> 
-  <h1>
-  IJAZ CALORIE CALCULATOR
-  </h1>
-  <p>
-  <input placeholder="Enter Gender (male/female)" onkeydown="totalCalories(event)" class="js-gender">
-  <button class="submit" onclick="submitted(this);calculateTotal()">
-    Submit
-  </button>
+<body>
 
-  </p>
-  <p>
-  <input placeholder="Enter Weight (KG)" class="js-weight">
-  <button class="submit" onclick="submitted(this);calculateTotal()">
-    Submit
-  </button>
+  <h1>IJAZ CALORIE CALCULATOR</h1>
 
-  </p>
-  <p>
-  <input placeholder="Enter Height(cm)" class="js-height">
-  <button class="submit" onclick="
-    submitted(this);
-    calculateTotal()">
-    Submit
-  </button>
+  <div class="input-group">
+    <input placeholder="Enter Gender (male/female)" onkeydown="totalCalories(event)" class="js-gender">
+    <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
+  </div>
 
-  </p>
-  <p>
-  <input placeholder="Enter Age" class="js-age">
-  <button class="submit" onclick="
-    submitted(this);
-    calculateTotal(); ">
-    Submit
-  </button>
-  
-  </p>
-  <p>
-    Please State your activity level:
-    A - Sedentary,
-    B- Lightly Active,
-    C- Moderately Active,
-    D- Very Active,
-    E- Extra Active
-  </p>
-  <input placeholder="Enter A/B/C/D/E" class="js-level">
-  <button class="submit" onclick="
-    submitted(this);
-    calculateTotal(); ">
-    Submit
-  </button>
+  <div class="input-group">
+    <input placeholder="Enter Weight (KG)" class="js-weight">
+    <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
+  </div>
+
+  <div class="input-group">
+    <input placeholder="Enter Height (cm)" class="js-height">
+    <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
+  </div>
+
+  <div class="input-group">
+    <input placeholder="Enter Age" class="js-age">
+    <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
+  </div>
+
+  <div class="input-group">
+    <p>Please State your activity level:<br>
+       A - Sedentary, B - Lightly Active, C - Moderately Active,<br>
+       D - Very Active, E - Extra Active
+    </p>
+    <input placeholder="Enter A/B/C/D/E" class="js-level">
+    <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
+  </div>
+
   <p class="tdee"></p>
-  <a href="ijaz-calculatorMain.html" class="button-class">Click Once You Have Recieved TDEE</a>
+
+  <a href="ijaz-calculatorMain.html" class="button-class">Click Once You Have Received TDEE</a>
+
 
     <script>
       

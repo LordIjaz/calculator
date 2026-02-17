@@ -1,40 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-		.button-class {
-			background-color: #4CAF50;
-			/* Green */
-			border: none;
-			color: white;
-			padding: 5px 10px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 16px;
-			margin: 4px 2px;
-			cursor: pointer;
-			border-radius: 4px;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IJAZ CALORIE CALCULATOR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-class {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .button-class:hover {
+            background-color: #45a049;
+        }
+
+        .tdee, .remains {
+            font-size: 18px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        a.button-class {
+            display: block;
+            max-width: 400px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+
     <h1>IJAZ CALORIE CALCULATOR</h1>
+
     <p class="tdee"></p>
     <p class="remains"></p>
+
     <h3>FOOD LOG</h3>
-    <input placeholder="Please Write Calories Consumed" class="consumed">
-    <button onclick="addCalories()" class="button-class">Submit</button>
-    <button class="button-class" onclick="
-    localStorage.removeItem('remains')
-    eatenTotal = 0
-    updateRemainsElement()">
-        Reset Calories Remaining
-    </button>
-    <p>
-<a href="index.html" class="button-class">Back to Calculate TDEE</a>
-</p>
+
+    <div class="input-group">
+        <input placeholder="Please Write Calories Consumed" class="consumed">
+        <button onclick="addCalories()" class="button-class">Submit</button>
+        <button class="button-class" onclick="
+            localStorage.removeItem('remains');
+            eatenTotal = 0;
+            updateRemainsElement();
+        ">Reset Calories Remaining</button>
+    </div>
+
+    <a href="index.html" class="button-class">Back to Calculate TDEE</a>
+
     <script>
         const saved = JSON.parse(localStorage.getItem('saved')) || 2000;
         const totalCalories = Math.round(saved) - 500;
@@ -55,7 +117,7 @@
             document.querySelector('.remains').innerHTML = 
                 `Your Remaining Calories are ${remains}`;
 
-            // Save the remains and eaten total
+
             localStorage.setItem('remains', JSON.stringify(remains));
             localStorage.setItem('eatenTotal', JSON.stringify(eatenTotal));
         }
@@ -71,5 +133,6 @@
             }
         }
     </script>
+
 </body>
 </html>
