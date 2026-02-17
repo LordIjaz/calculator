@@ -98,8 +98,9 @@
     <a href="index.html" class="button-class">Back to Calculate TDEE</a>
 
     <script>
+        const timeSave = JSON.parse(localStorage.getItem('timeSave'))
         const saved = JSON.parse(localStorage.getItem('saved')) || 2000;
-        const totalCalories = Math.round(saved) - 500;
+        const totalCalories = Math.round(saved) - timeSave;
         let eatenTotal = JSON.parse(localStorage.getItem('eatenTotal')) || 0;
 
         const consumedElement = document.querySelector('.consumed');
@@ -109,7 +110,8 @@
 
         function updateTdeeElement() {
             document.querySelector('.tdee').innerHTML = 
-                `Your Total Calorie Allowance (TO LOSE WEIGHT) is ${totalCalories}`;
+                `Your Total Calorie Allowance
+                (TO LOSE WEIGHT at the pace of a ${timeSave}cal defecit) is ${totalCalories}`;
         }
 
         function updateRemainsElement() {

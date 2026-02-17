@@ -108,6 +108,12 @@
     <input placeholder="Enter A/B/C/D/E" class="js-level">
     <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
   </div>
+  <p>Please choose a weight loss rate:<br>
+       A - Controlled (250cal defecit), B - Medium (500cal defect), C - Fast (1000 cal defecit)
+    </p>
+    <input placeholder="Enter A/B/C" class="js-time">
+    <button class="submit" onclick="submitted(this);calculateTotal()">Submit</button>
+  </div>
 
   <p class="tdee"></p>
 
@@ -124,27 +130,36 @@
       function calculateTotal(){
 
 
-    const genderElement = document.querySelector('.js-gender')
+    const genderElement = document.querySelector('.js-gender').value.toUpperCase()
+    const timeElement = document.querySelector('.js-time').value.toUpperCase()
     const weightElement = document.querySelector('.js-weight')
     const heightElement = document.querySelector('.js-height')
     const ageElement = document.querySelector('.js-age')
-    const levelElement = document.querySelector('.js-level')
+    const levelElement = document.querySelector('.js-level').value.toUpperCase()
     if (!genderElement) {
         console.error("Gender input not found")
         return
     }
     let levelScore = 1
-    if (levelElement.value === 'A'){
+    if (levelElement === 'A'){
       levelScore = 1.2
-    } else if(levelElement.value === 'B'){
+    } else if(levelElement === 'B'){
       levelScore = 1.375
-    }else if(levelElement.value === 'C'){
+    }else if(levelElement === 'C'){
       levelScore = 1.55
-    }else if(levelElement.value === 'D'){
+    }else if(levelElement === 'D'){
       levelScore = 1.725
-    }else if (levelElement.value === 'E'){  
+    }else if (levelElement === 'E'){  
       levelScore = 1.9
   }
+  let time = 1
+    if (timeElement === 'A'){
+      time = 250
+    } else if(timeElement === 'B'){
+      time = 500
+    }else if(timeElement === 'C'){
+      time = 1000
+    }
 
     const allSubmitted = areAllSubmitted()
     const weight = Number(weightElement.value)
@@ -153,15 +168,17 @@
 
 
 
-    if (allSubmitted && genderElement.value === 'female') {
+    if (allSubmitted && genderElement === 'FEMALE') {
         const tdee = ((10*weight)+(6.25*height)-(5*age)-(161)) * levelScore;
           localStorage.setItem('saved',JSON.stringify(tdee))
+          localStorage.setItem('timeSave',JSON.stringify(time))
           console.log(tdee)
           updateTdeeElement(tdee)
           
-    }else if(allSubmitted && genderElement.value === 'male'){
+    }else if(allSubmitted && genderElement === 'MALE'){
       const tdee = ((10*weight)+(6.25*height)-(5*age)+(5)) * levelScore;
            localStorage.setItem('saved',JSON.stringify(tdee))
+           localStorage.setItem('timeSave',JSON.stringify(time))
           console.log(tdee)
         updateTdeeElement(tdee)}
         
