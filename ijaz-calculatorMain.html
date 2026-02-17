@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+		.button-class {
+			background-color: #4CAF50;
+			/* Green */
+			border: none;
+			color: white;
+			padding: 5px 10px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 4px;
+		}
+	</style>
+    <title>IJAZ CALORIE CALCULATOR</title>
+</head>
+<body>
+    <h1>IJAZ CALORIE CALCULATOR</h1>
+    <p class="tdee"></p>
+    <p class="remains"></p>
+    <h3>FOOD LOG</h3>
+    <input placeholder="Please Write Calories Consumed" class="consumed">
+    <button onclick="addCalories()" class="button-class">Submit</button>
+    <button class="button-class" onclick="
+    localStorage.removeItem('remains')
+    eatenTotal = 0
+    updateRemainsElement()">
+        Reset Calories Remaining
+    </button>
+    <p>
+<a href="index.html" class="button-class">Back to Calculate TDEE</a>
+</p>
+    <script>
+        const saved = JSON.parse(localStorage.getItem('saved')) || 2000;
+        const totalCalories = Math.round(saved) - 500;
+        let eatenTotal = JSON.parse(localStorage.getItem('eatenTotal')) || 0;
+
+        const consumedElement = document.querySelector('.consumed');
+
+        updateTdeeElement();
+        updateRemainsElement();
+
+        function updateTdeeElement() {
+            document.querySelector('.tdee').innerHTML = 
+                `Your Total Calorie Allowance (TO LOSE WEIGHT) is ${totalCalories}`;
+        }
+
+        function updateRemainsElement() {
+            const remains = totalCalories - eatenTotal;
+            document.querySelector('.remains').innerHTML = 
+                `Your Remaining Calories are ${remains}`;
+
+            // Save the remains and eaten total
+            localStorage.setItem('remains', JSON.stringify(remains));
+            localStorage.setItem('eatenTotal', JSON.stringify(eatenTotal));
+        }
+
+        function addCalories() {
+            const consumed = Number(consumedElement.value);
+            if (!isNaN(consumed) && consumed > 0) {
+                eatenTotal += consumed;
+                updateRemainsElement();
+                consumedElement.value = '';
+            } else {
+                alert('Please enter a valid number');
+            }
+        }
+    </script>
+</body>
+</html>

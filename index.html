@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IJAZ CALORIE CALCULATOR</title>
+  <style>
+		.button-class {
+			background-color: #4CAF50;
+			/* Green */
+			border: none;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+<body> 
+  <h1>
+  IJAZ CALORIE CALCULATOR
+  </h1>
+  <p>
+  <input placeholder="Enter Gender (male/female)" onkeydown="totalCalories(event)" class="js-gender">
+  <button class="submit" onclick="submitted(this);calculateTotal()">
+    Submit
+  </button>
+
+  </p>
+  <p>
+  <input placeholder="Enter Weight (KG)" class="js-weight">
+  <button class="submit" onclick="submitted(this);calculateTotal()">
+    Submit
+  </button>
+
+  </p>
+  <p>
+  <input placeholder="Enter Height(cm)" class="js-height">
+  <button class="submit" onclick="
+    submitted(this);
+    calculateTotal()">
+    Submit
+  </button>
+
+  </p>
+  <p>
+  <input placeholder="Enter Age" class="js-age">
+  <button class="submit" onclick="
+    submitted(this);
+    calculateTotal(); ">
+    Submit
+  </button>
+  
+  </p>
+  <p>
+    Please State your activity level:
+    A - Sedentary,
+    B- Lightly Active,
+    C- Moderately Active,
+    D- Very Active,
+    E- Extra Active
+  </p>
+  <input placeholder="Enter A/B/C/D/E" class="js-level">
+  <button class="submit" onclick="
+    submitted(this);
+    calculateTotal(); ">
+    Submit
+  </button>
+  <p class="tdee"></p>
+  <a href="ijaz-calculatorMain.html" class="button-class">Click Once You Have Recieved TDEE</a>
+
+    <script>
+      
+      function totalCalories(event){
+      if(event.key === 'Enter'){
+      calculateTotal() 
+      }
+      }
+      function calculateTotal(){
+
+
+    const genderElement = document.querySelector('.js-gender')
+    const weightElement = document.querySelector('.js-weight')
+    const heightElement = document.querySelector('.js-height')
+    const ageElement = document.querySelector('.js-age')
+    const levelElement = document.querySelector('.js-level')
+    if (!genderElement) {
+        console.error("Gender input not found")
+        return
+    }
+    let levelScore = 1
+    if (levelElement.value === 'A'){
+      levelScore = 1.2
+    } else if(levelElement.value === 'B'){
+      levelScore = 1.375
+    }else if(levelElement.value === 'C'){
+      levelScore = 1.55
+    }else if(levelElement.value === 'D'){
+      levelScore = 1.725
+    }else if (levelElement.value === 'E'){  
+      levelScore = 1.9
+  }
+
+    const allSubmitted = areAllSubmitted()
+    const weight = Number(weightElement.value)
+    const height = Number(heightElement.value)
+    const age = Number(ageElement.value)
+
+
+
+    if (allSubmitted && genderElement.value === 'female') {
+        const tdee = ((10*weight)+(6.25*height)-(5*age)-(161)) * levelScore;
+          localStorage.setItem('saved',JSON.stringify(tdee))
+          console.log(tdee)
+          updateTdeeElement(tdee)
+          
+    }else if(allSubmitted && genderElement.value === 'male'){
+      const tdee = ((10*weight)+(6.25*height)-(5*age)+(5)) * levelScore;
+           localStorage.setItem('saved',JSON.stringify(tdee))
+          console.log(tdee)
+        updateTdeeElement(tdee)}
+        
+        function updateTdeeElement(tdee){
+        document.querySelector('.tdee')
+          .innerHTML = `Your TDEE is ${tdee}`
+
+      }}
+
+
+
+
+      function submitted(buttonElement) {
+    if (buttonElement.innerText === 'Submit') {
+        buttonElement.innerText = 'Submitted'
+    } else {
+        buttonElement.innerText = 'Submit'
+    }
+}
+
+    function areAllSubmitted() {
+    const allButtons = document.querySelectorAll('.submit')
+
+    return [...allButtons].every(
+        button => button.innerText === 'Submitted'
+    )
+}
+        
+    </script>
+  </body>
+</html>
